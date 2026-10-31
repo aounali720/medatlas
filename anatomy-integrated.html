@@ -64,7 +64,7 @@ body.compact .progress{top:22px}
 <input class="searchbox" id="search" placeholder="Search heart, tibia, vagus nerve…" type="search" autocomplete="off" aria-label="Search named anatomical structures">
 <p class="muted" id="search-help">Select a system or search named structures after the mesh loads.</p>
 <div id="selected"></div><div class="results" id="results"></div>
-<div class="source"><strong>Provenance</strong><p>Z-Anatomy (CC BY-SA 4.0), derived in part from BodyParts3D, adapted for web delivery by Vanatome. Every layer shares the same anatomical coordinate space. Source mesh data is educational, not clinically validated for diagnosis or surgical planning.</p><a href="MODEL_ATTRIBUTION.md" target="_blank" rel="noopener noreferrer">Detailed credits and limitations ↗</a></div>
+<div class="source"><strong>Provenance</strong><p>Z-Anatomy (CC BY-SA 4.0), derived in part from BodyParts3D, adapted for web delivery by Vanatome. Every layer shares the same anatomical coordinate space. Source mesh data is educational, not clinically validated for diagnosis or surgical planning.</p><a href="MODEL_ATTRIBUTION.md" target="_blank" rel="noopener noreferrer">Detailed credits and limitations ↗</a><p><a href="https://vanatome.vixotic.in" target="_blank" rel="noopener noreferrer">Open original Vanatome atlas ↗</a></p></div>
 </aside>
 </main>
 <script>if(new URLSearchParams(location.search).has('compact'))document.body.classList.add('compact');</script>
@@ -139,6 +139,9 @@ window.addEventListener('message',async event=>{
 updateLayerUI();preset('skeleton');
 </script>
 <script>
-window.addEventListener('unhandledrejection',()=>{const b=document.getElementById('progress');if(!b.hidden){document.getElementById('progress-title').textContent='3D renderer unavailable';document.getElementById('progress-detail').textContent='WebGL or a remote JavaScript module could not load. Check your network or WebGL support.';}});
+function missingRenderer(){const b=document.getElementById('progress');if(!b.hidden){document.getElementById('progress-title').textContent='3D renderer unavailable';document.getElementById('progress-detail').textContent='The 3D library or geometry could not load on this network. Try the original Vanatome atlas linked at right, or enable WebGL.';}}
+window.addEventListener('unhandledrejection',missingRenderer);
+window.addEventListener('error',e=>{if(/module|import|failed to fetch|WebGL/i.test(e.message||''))missingRenderer();});
+setTimeout(()=>{if(document.getElementById('status')?.textContent.includes('Initializing viewer'))missingRenderer();},15000);
 </script>
 </body></html>

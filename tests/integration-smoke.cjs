@@ -24,7 +24,7 @@ for(const note of W.notes){for(const k of required)assert(typeof note[k]==='stri
 for(const r of Object.values(W.references))assert(/^https:\/\//.test(r.url),'reference must use HTTPS');
 const paths=['overview','anatomy','guidelines','conditions','medicines','procedures','dictionary','learning','curriculum','clinical','investigations','cases','specialist','mastery','ward','bookmarks','sources','search'];
 for(const route of paths){context.location.hash='#/'+route;for(const cb of events['window:hashchange']||[])cb();assert(mock('page').innerHTML.length>100,`empty page: ${route}`)}
-assert(mock('page').innerHTML.includes('reference'),'sources route should contain source list');
+context.location.hash='#/sources';for(const cb of events['window:hashchange']||[])cb();assert(mock('page').innerHTML.includes('Primary references'),'sources route should contain the source shelf');
 context.location.hash='#/ward';for(const cb of events['window:hashchange']||[])cb();
 assert(mock('page').innerHTML.includes('THE WARD DESK')&&mock('page').innerHTML.includes(W.notes[0].title),'ward page rendering missing');
 const field=mock('global-search');field.value='neutropenic';for(const cb of field.listeners.input||[])cb({target:field});

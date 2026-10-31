@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MedAtlas | Integrated Human Anatomy</title>
+<meta name="description" content="Interactive multi-system human anatomy explorer with aligned 3D bones, muscles, organs, arteries, veins and nerves.">
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#e8f4f5;background:#0d1c27;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;overflow:hidden}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid #69e8cf;outline-offset:3px}
+.atlas{display:grid;grid-template-columns:245px minmax(0,1fr) 275px;height:100dvh;min-height:570px;background:#0e1c27}
+.sidebar,.inspect{background:#102431;min-height:0;z-index:3;border-color:#325060;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#355c64 transparent}
+.sidebar{border-right:1px solid #294657;padding:18px 15px}.inspect{border-left:1px solid #294657;padding:17px 16px}
+.brand{font-size:14px;font-weight:850;letter-spacing:.07em;color:#edf8f6;display:flex;align-items:center;gap:8px}.emblem{display:grid;place-items:center;width:29px;height:29px;border:1px solid #367f7c;background:#183e47;color:#7ff7d6;border-radius:9px;font-size:19px}.muted{color:#98b4bd;font-size:11px;line-height:1.65}.brand-sub{margin:7px 0 20px}.eyebrow{font-size:9px;letter-spacing:1.25px;color:#66d0c2;font-weight:850;margin:18px 0 10px;text-transform:uppercase}.choice,.preset{display:flex;align-items:center;gap:10px;width:100%;background:transparent;color:#d4e8ec;border:1px solid transparent;border-radius:10px;padding:10px 9px;text-align:left;margin:3px 0;font-size:12px}
+.choice:hover,.preset:hover{background:#1c3a44}.choice[aria-pressed="true"],.preset[aria-pressed="true"]{background:#214b50;border-color:#3c817e;color:#fff}
+.swatch{height:10px;width:10px;flex:none;border-radius:4px}.choice .count{margin-left:auto;color:#7f9ba7;font-size:10px}.choice .check{margin-left:auto;width:16px;height:16px;border:1px solid #65838a;border-radius:5px;display:grid;place-items:center;font-size:11px;color:#91ffe2}.choice[aria-pressed="true"] .check{background:#64bda9;border-color:#64bda9;color:#0c2732}
+.preset{font-size:11px;background:#152e3a;border-color:#264d55;padding:11px 12px}.preset span:last-child{margin-left:auto;color:#77ddcc}.meta-line{font-size:10px;color:#8faeb8;display:flex;justify-content:space-between;gap:5px;margin:16px 0 8px}.slider{width:100%;accent-color:#80e6d2}
+.viewport{position:relative;min-width:0;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#183b48 0%,#0c202b 58%,#08151f 100%)}
+.viewport:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 49px,#9bbfc607 50px),repeating-linear-gradient(90deg,transparent 0 49px,#9bbfc607 50px);mask-image:radial-gradient(ellipse at center,#0008,transparent 80%)}
+#stage{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block;cursor:grab}#stage:active{cursor:grabbing}
+.topbar{position:absolute;left:16px;right:16px;top:16px;pointer-events:none;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.topbar .heading{letter-spacing:.9px;font-weight:850;font-size:11px}.topbar .sub{color:#9db4bc;font-size:10px;line-height:1.7;margin-top:4px}.status{font-size:10px;padding:8px 10px;border:1px solid #41786d;color:#b9f1e5;border-radius:9px;background:#123a3caa;max-width:55%;text-align:right}
+.bottom{position:absolute;left:12px;right:12px;bottom:15px;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;pointer-events:none}.bottom button{pointer-events:auto;background:#173745ec;color:#d9f0f1;border:1px solid #46717a;border-radius:9px;font-size:11px;padding:10px 12px}.bottom button:hover{background:#2f6771}.bottom button[aria-pressed="true"]{background:#377d76;border-color:#7ae9cf}
+.progress{position:absolute;top:68px;left:50%;transform:translateX(-50%);min-width:min(360px,85%);border:1px solid #386979;background:#102631eF;border-radius:13px;padding:15px 18px;text-align:center;z-index:2;box-shadow:0 22px 75px #0006}.progress[hidden]{display:none}.progress strong{font-size:12px;display:block}.progress p{font-size:11px;line-height:1.6;color:#afc3c9}.progress progress{width:100%;height:7px;accent-color:#6de9cd}.progress a{color:#79e6d0}
+.searchbox{width:100%;background:#172f3b;border:1px solid #3c5d68;color:#f2faf8;border-radius:10px;padding:12px 11px;font-size:12px;outline:none}.searchbox::placeholder{color:#8aa7b2}.results{margin:13px 0 0;display:grid;gap:5px;max-height:43vh;overflow-y:auto;scrollbar-width:thin}.result{display:block;text-align:left;color:#d8eaee;background:#17323f;border:1px solid #2f515d;border-radius:9px;padding:10px 11px;font-size:11px;width:100%}.result:hover{border-color:#80d4bf;background:#214850}.result small{display:block;color:#82a8b0;margin-top:4px;line-height:1.4}
+.result[aria-selected="true"]{background:#285f5c;border-color:#74d7c2}.selection{background:#193541;border:1px solid #416775;border-radius:14px;padding:16px;margin-top:15px}.selection h2{font-size:17px;margin:7px 0;line-height:1.45;color:#fff}.selection .typ{font-size:9px;letter-spacing:1px;font-weight:850;color:#8de6d1}.selection p{font-size:11px;color:#b9d0d5;line-height:1.8}.selection .minor{font-size:10px;color:#87a3ad}.selection a{color:#83ead5;font-weight:750}.selection button{background:#265b59;border:1px solid #38897e;color:#dffaf4;padding:10px 11px;border-radius:9px;font-size:11px;margin-top:9px}
+.source{font-size:10px;line-height:1.65;color:#84a4b0;border-top:1px solid #31515b;margin-top:24px;padding-top:13px}.source a{color:#79dcc9}
+.note{border:1px solid #3b5966;border-radius:12px;padding:12px;color:#adc2c9;font-size:10.5px;line-height:1.8;background:#142f3b}
+.loadingdot{display:inline-block;height:7px;width:7px;background:#5af0c7;border-radius:50%;margin-right:4px;box-shadow:0 0 10px #60efca}
+.empty{color:#97b2ba;text-align:center;font-size:11px;line-height:1.7;padding:20px}
+body.compact .atlas{display:block;height:100dvh;min-height:0}
+body.compact .sidebar,body.compact .inspect,body.compact .topbar,body.compact .bottom{display:none!important}
+body.compact .viewport{height:100dvh;min-height:0}
+body.compact .progress{top:22px}
+@media(max-width:1100px){.atlas{grid-template-columns:215px minmax(0,1fr) 230px}.sidebar,.inspect{padding:15px 11px}}
+@media(max-width:850px){body{overflow:auto}.atlas{height:auto;min-height:100dvh;grid-template-columns:1fr;grid-template-rows:auto minmax(520px,65dvh) auto}.sidebar{border:0;border-bottom:1px solid #315462;display:grid;grid-template-columns:1fr 1fr;gap:4px 13px;overflow:visible}.brand,.brand-sub,.sidebar .eyebrow{grid-column:1/-1}.layerlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 5px;grid-column:1/-1}.choice{font-size:11px;padding:8px 7px}.preset{margin:2px 0}.sidebar .meta-line,.sidebar .slider{grid-column:1/-1}.inspect{border:0;border-top:1px solid #315462;overflow:visible}.results{grid-template-columns:repeat(2,minmax(0,1fr));max-height:300px}.viewport{height:65dvh;min-height:520px}.topbar{top:12px;left:12px;right:12px}.status{max-width:50%;font-size:9px}.bottom{bottom:12px}.bottom button{padding:9px}}
+@media(max-width:480px){.atlas{grid-template-rows:auto 550px auto}.viewport{height:550px;min-height:550px}.sidebar{grid-template-columns:1fr 1fr}.topbar .heading{font-size:10px}.topbar .sub{font-size:9px}.results{grid-template-columns:1fr}.bottom button{padding:7px 9px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.loadingdot{box-shadow:none}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
+</head>
+<body>
+<main class="atlas">
+<aside class="sidebar" aria-label="Anatomy layers and presets">
+<div class="brand"><span class="emblem">✚</span> MEDATLAS <span style="color:#70d9c4">/ Anatomy</span></div>
+<p class="muted brand-sub">One aligned human anatomical atlas. Reveal bones, muscles, organs, blood vessels, nerves and associated systems.</p>
+<div class="eyebrow">Quick study views</div>
+<button type="button" class="preset" data-preset="skeleton">Skeletal system <span>↗</span></button>
+<button type="button" class="preset" data-preset="organs">Internal organs <span>↗</span></button>
+<button type="button" class="preset" data-preset="neurovascular">Neurovascular anatomy <span>↗</span></button>
+<button type="button" class="preset" data-preset="whole">Whole-body systems <span>↗</span></button>
+<div class="eyebrow">Anatomical systems</div>
+<div class="layerlist" id="layers"></div>
+<div class="meta-line"><span>Layer transparency</span><span id="opacity-num">100%</span></div>
+<input type="range" id="opacity" class="slider" min="15" max="100" value="100" aria-label="Opacity of selected anatomical layers">
+<p class="muted">Toggle layers to load only the structures you need. The first download may use several megabytes.</p>
+</aside>
+<section class="viewport" id="viewport" aria-label="Interactive 3D full human anatomy viewer">
+<div class="topbar"><div><div class="heading">HUMAN ANATOMY · SYSTEMS ATLAS</div><div class="sub">Drag to rotate · scroll to zoom · click a structure to inspect</div></div><div class="status" id="status" role="status"><span class="loadingdot"></span>Initializing viewer</div></div>
+<canvas id="stage" tabindex="0" aria-label="3D anatomical model. Drag to rotate, scroll to zoom, click structure to inspect."></canvas>
+<div class="progress" id="progress" role="status"><strong id="progress-title">Preparing skeletal model</strong><p id="progress-detail">Loading anatomical geometry and WebGL renderer…</p><progress id="progress-bar" max="100" value="0"></progress></div>
+<div class="bottom"><button type="button" data-view="front">Anterior</button><button type="button" data-view="back">Posterior</button><button type="button" data-view="left">Lateral</button><button type="button" data-view="reset">Reset</button><button type="button" id="center-selected" disabled>Focus selection</button></div>
+</section>
+<aside class="inspect" aria-label="Anatomical structure browser">
+<div class="eyebrow" style="margin-top:3px">Structure locator</div>
+<input class="searchbox" id="search" placeholder="Search heart, tibia, vagus nerve…" type="search" autocomplete="off" aria-label="Search named anatomical structures">
+<p class="muted" id="search-help">Select a system or search named structures after the mesh loads.</p>
+<div id="selected"></div><div class="results" id="results"></div>
+<div class="source"><strong>Provenance</strong><p>Z-Anatomy (CC BY-SA 4.0), derived in part from BodyParts3D, adapted for web delivery by Vanatome. Every layer shares the same anatomical coordinate space. Source mesh data is educational, not clinically validated for diagnosis or surgical planning.</p><a href="MODEL_ATTRIBUTION.md" target="_blank" rel="noopener noreferrer">Detailed credits and limitations ↗</a></div>
+</aside>
+</main>
+<script>if(new URLSearchParams(location.search).has('compact'))document.body.classList.add('compact');</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+const COMMIT='8185b3fa46a1dbefdd907390918c57954fd9b816';
+const SOURCE=`https://cdn.jsdelivr.net/gh/vixotic/Vanatome@${COMMIT}/public/models/`;
+const BACKUP='https://raw.githubusercontent.com/vixotic/Vanatome/'+COMMIT+'/public/models/';
+const SYSTEMS=[
+ {id:'skeletal',label:'Skeleton',file:'skeletal',color:'#dfd9be',count:'bones'},
+ {id:'muscular',label:'Muscles',file:'muscular',color:'#d27d7b',count:'muscles'},
+ {id:'cardiovascular',label:'Heart & vessels',file:'cardiovascular',color:'#e65968',count:'vessels'},
+ {id:'nervous',label:'Brain & nerves',file:'nervous',color:'#ddae7d',count:'neural'},
+ {id:'respiratory',label:'Lungs & airways',file:'respiratory',color:'#86c5d2',count:'airways'},
+ {id:'digestive',label:'Digestive organs',file:'digestive',color:'#cfa16c',count:'organs'},
+ {id:'urinary',label:'Urinary system',file:'urinary',color:'#9cb1d7',count:'organs'},
+ {id:'endocrine',label:'Endocrine glands',file:'endocrine',color:'#bda1da',count:'glands'},
+ {id:'reproductive',label:'Reproductive system',file:'reproductive',color:'#e7abbb',count:'organs'},
+ {id:'lymphatic',label:'Lymphatic system',file:'lymphatic',color:'#8dc9a8',count:'lymphatics'}
+];
+const $=id=>document.getElementById(id);
+const scene=new THREE.Scene();scene.background=null;
+const camera=new THREE.PerspectiveCamera(33,1,.01,150);
+const canvas=$('stage');const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;
+const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=.3;controls.maxDistance=20;
+const home={pos:new THREE.Vector3(2.9,1.42,4.1),target:new THREE.Vector3(0,.98,0)};camera.position.copy(home.pos);controls.target.copy(home.target);
+scene.add(new THREE.HemisphereLight(0xe9f9ff,0x263744,2.7));const key=new THREE.DirectionalLight(0xfff5e7,3.2);key.position.set(3,6,5);scene.add(key);const fill=new THREE.DirectionalLight(0x7cd9ff,2.1);fill.position.set(-3,3,-4);scene.add(fill);
+const holder=new THREE.Group();scene.add(holder);
+const loader=new GLTFLoader();const draco=new DRACOLoader();draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/libs/draco/');loader.setDRACOLoader(draco);loader.setMeshoptDecoder(MeshoptDecoder);
+const groups=new Map(),items=[],loaded=new Set(),pending=new Map(),active=new Set(),original=new WeakMap();let selected=null,selectedMaterial=null,initialFit=false,opacity=1,loadCount=0;
+const labelById=Object.fromEntries(SYSTEMS.map(x=>[x.id,x]));
+function status(msg){$('status').textContent=msg;}
+function showLoad(title,detail){$('progress').hidden=false;$('progress-title').textContent=title;$('progress-detail').textContent=detail;$('progress-bar').value=0;}
+function hideLoad(){if(!pending.size)$('progress').hidden=true;}
+function setOpacity(value){opacity=value;for(const group of groups.values())group.traverse(o=>{if(!o.isMesh)return;const mat=o.material;if(!mat)return;const all=Array.isArray(mat)?mat:[mat];all.forEach(m=>{m.transparent=opacity<1;m.opacity=opacity;m.depthWrite=opacity>=1;m.needsUpdate=true;});});}
+function addSystem(sys,gltf){const root=gltf.scene;root.name=sys.label;root.visible=active.has(sys.id);const index=[];root.traverse(o=>{if(!o.isMesh)return; o.userData.medSystem=sys.id; o.userData.medName=(o.userData.za_name||o.userData.name||o.name||'Unlabelled structure').replace(/[_]+/g,' ').replace(/\d+$/,'').trim();if(!o.userData.medName)o.userData.medName='Unnamed structure';if(o.material){const materials=(Array.isArray(o.material)?o.material:[o.material]).map(x=>x.clone());o.material=Array.isArray(o.material)?materials:materials[0];}index.push(o);items.push(o);});groups.set(sys.id,root);holder.add(root);loaded.add(sys.id);setOpacity(opacity);updateLayerUI();renderResults();if(!initialFit&&sys.id==='skeletal'){fitBody(root);initialFit=true;}status(`${items.length.toLocaleString()} loaded structures · select to inspect`);}
+function fitBody(root){const box=new THREE.Box3().setFromObject(root);if(box.isEmpty())return;const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());const extent=Math.max(size.x,size.y,size.z);if(!Number.isFinite(extent)||extent===0)return;home.target.copy(center);home.pos.set(center.x+extent*.53,center.y+extent*.23,center.z+extent*1.35);controls.target.copy(home.target);camera.position.copy(home.pos);controls.minDistance=Math.max(.15,extent*.12);controls.maxDistance=extent*8;camera.near=Math.max(.005,extent*.003);camera.far=extent*35;camera.updateProjectionMatrix();}
+function downloadOnce(sys,url,attempt=0){return new Promise((resolve,reject)=>loader.load(url,resolve,event=>{if(event.total&&pending.size){$('progress-bar').value=Math.min(100,Math.round(100*event.loaded/event.total));$('progress-detail').textContent=`${sys.label} · ${Math.round(event.loaded/1024)} KB downloaded`; }},error=>{if(attempt===0){downloadOnce(sys,BACKUP+`z-anatomy-1.4.0-${sys.file}.glb`,1).then(resolve,reject);}else reject(error)}));}
+async function ensure(sys){if(loaded.has(sys.id))return;if(pending.has(sys.id))return pending.get(sys.id);showLoad(`Loading ${sys.label}`, 'Requesting an aligned anatomical layer…');loadCount++;const promise=downloadOnce(sys,SOURCE+`z-anatomy-1.4.0-${sys.file}.glb`).then(gltf=>{addSystem(sys,gltf);}).catch(error=>{status(`${sys.label} could not load`);$('progress-title').textContent=`${sys.label} unavailable`;$('progress-detail').textContent='A model host or decoder was blocked. Check internet access; other downloaded layers remain usable.';$('progress-bar').value=0;console.warn('Anatomy layer load failure',sys.id,error);active.delete(sys.id);updateLayerUI();}).finally(()=>{pending.delete(sys.id);if(!pending.size&&loaded.size)hideLoad();});pending.set(sys.id,promise);return promise;}
+function updateLayerUI(){const node=$('layers');node.replaceChildren();for(const sys of SYSTEMS){const b=document.createElement('button');b.className='choice';b.type='button';b.dataset.system=sys.id;b.setAttribute('aria-pressed',String(active.has(sys.id)));const sw=document.createElement('span');sw.className='swatch';sw.style.background=sys.color;const txt=document.createElement('span');txt.textContent=sys.label;const check=document.createElement('span');check.className='check';check.textContent=active.has(sys.id)?'✓':loaded.has(sys.id)?'·':'';b.append(sw,txt,check);b.onclick=()=>{toggle(sys.id);};node.append(b);}}
+async function toggle(id){if(active.has(id)){active.delete(id);if(groups.has(id))groups.get(id).visible=false;}else{active.add(id);if(groups.has(id))groups.get(id).visible=true;else await ensure(labelById[id]);}if(selected&&!selected.visible){clearSelection();}updateLayerUI();renderResults();}
+const presets={skeleton:['skeletal'],organs:['skeletal','respiratory','digestive','urinary','endocrine'],neurovascular:['skeletal','cardiovascular','nervous'],whole:['skeletal','muscular','cardiovascular','nervous','respiratory','digestive','urinary','endocrine','reproductive','lymphatic']};
+async function preset(name){active.clear();presets[name].forEach(x=>active.add(x));for(const [id,group] of groups)group.visible=active.has(id);clearSelection();updateLayerUI();document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.preset===name)));const uncached=presets[name].filter(x=>!loaded.has(x));for(const id of uncached)await ensure(labelById[id]);updateLayerUI();renderResults();}
+const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let down=null;
+canvas.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});canvas.addEventListener('pointerup',e=>{if(!down)return;if(Math.hypot(e.clientX-down.x,e.clientY-down.y)<6){const rect=canvas.getBoundingClientRect();mouse.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);ray.setFromCamera(mouse,camera);const visible=items.filter(m=>active.has(m.userData.medSystem)&&m.visible);const found=ray.intersectObjects(visible,false)[0];if(found)select(found.object);}down=null;});
+function clearSelection(){if(selected&&original.has(selected))selected.material=original.get(selected);selected=null;$('selected').replaceChildren();$('center-selected').disabled=true;renderResults();}
+function select(mesh,focus=false){if(selected&&original.has(selected))selected.material=original.get(selected);selected=mesh;original.set(mesh,mesh.material);const mats=Array.isArray(mesh.material)?mesh.material:[mesh.material];const highlights=mats.map(mat=>{const t=mat.clone();t.emissive=new THREE.Color('#38e9b9');t.emissiveIntensity=.45;t.color.set('#e1fff0');return t;});mesh.material=Array.isArray(mesh.material)?highlights:highlights[0];const sys=labelById[mesh.userData.medSystem];const section=$('selected');section.replaceChildren();const pane=document.createElement('div');pane.className='selection';const sub=document.createElement('div');sub.className='typ';sub.textContent=sys.label.toUpperCase();const title=document.createElement('h2');title.textContent=mesh.userData.medName;const desc=document.createElement('p');desc.textContent='Selected from the aligned 3D '+sys.label.toLowerCase()+' layer. Use the spatial position to study anatomical relationships. Consult a referenced anatomy textbook for attachments, innervation, actions and clinical correlations.';const a=document.createElement('a');a.href='https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction';a.target='_blank';a.rel='noopener noreferrer';a.textContent='OpenStax anatomy reference ↗';const btn=document.createElement('button');btn.type='button';btn.textContent='Frame selected structure';btn.onclick=()=>focusSelected();pane.append(sub,title,desc,a,document.createElement('br'),btn);section.append(pane);$('center-selected').disabled=false;renderResults();if(focus)focusSelected();}
+function focusSelected(){if(!selected)return;const bounds=new THREE.Box3().setFromObject(selected);const c=bounds.getCenter(new THREE.Vector3()),sz=bounds.getSize(new THREE.Vector3());const distance=Math.max(.18,sz.length()*2.3);const dir=camera.position.clone().sub(controls.target).normalize();controls.target.copy(c);camera.position.copy(c.clone().addScaledVector(dir,distance));controls.update();}
+function renderResults(){const q=$('search').value.trim().toLowerCase(),results=$('results');results.replaceChildren();if(!q){$('search-help').textContent=`${items.length.toLocaleString()} structures loaded. Search a name or click the model.`;return;}const match=items.filter(x=>(x.userData.medName||'').toLowerCase().includes(q)).sort((a,b)=>a.userData.medName.localeCompare(b.userData.medName)).slice(0,75);$('search-help').textContent=`${match.length} matching names (up to 75 shown)`;for(const m of match){const b=document.createElement('button');b.type='button';b.className='result';b.setAttribute('aria-selected',String(m===selected));b.textContent=m.userData.medName;const small=document.createElement('small');small.textContent=labelById[m.userData.medSystem].label;b.append(small);b.onclick=()=>{if(!active.has(m.userData.medSystem)){active.add(m.userData.medSystem);groups.get(m.userData.medSystem).visible=true;updateLayerUI();}select(m,true)};results.append(b);}if(!match.length)results.innerHTML='<p class="empty">No matching loaded structure. Try enabling another system.</p>';}
+function moveView(name){const tgt=home.target.clone(),diff=home.pos.clone().sub(home.target),dist=diff.length();if(name==='reset'){controls.target.copy(tgt);camera.position.copy(home.pos);}else{const d=new THREE.Vector3(name==='left'?dist:0,dist*.1,name==='back'?-dist: name==='left'?0:dist);camera.position.copy(tgt).add(d);controls.target.copy(tgt);}controls.update();}
+function resize(){const rect=$('viewport').getBoundingClientRect();if(!rect.width||!rect.height)return;const dpr=Math.min(2,devicePixelRatio||1);renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();}new ResizeObserver(resize).observe($('viewport'));resize();
+renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera);});
+$('opacity').addEventListener('input',e=>{const v=Number(e.target.value);$('opacity-num').textContent=v+'%';setOpacity(v/100)});$('search').addEventListener('input',renderResults);
+document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>preset(b.dataset.preset));document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>moveView(b.dataset.view));$('center-selected').onclick=focusSelected;
+window.addEventListener('keydown',e=>{if(e.key==='Escape')clearSelection();});
+// Allow the medical reference panel to open and focus matching structures.
+const ORGAN_MAP={heart:['cardiovascular','heart'],lungs:['respiratory','lung'],brain:['nervous','brain'],liver:['digestive','liver'],stomach:['digestive','stomach'],kidneys:['urinary','kidney'],intestines:['digestive','intestin'],bladder:['urinary','bladder'],spine:['skeletal','vertebra']};
+window.addEventListener('message',async event=>{
+ if(event.origin!==location.origin||event.data?.type!=='MEDATLAS_FOCUS')return;
+ const organ=String(event.data.organ||'').toLowerCase(), target=ORGAN_MAP[organ];if(!target)return;
+ const [id,term]=target;if(!active.has(id))await toggle(id);else await ensure(labelById[id]);
+ const found=items.find(m=>m.userData.medSystem===id&&m.userData.medName.toLowerCase().includes(term));
+ if(found)select(found,true);
+ else{document.getElementById('search').value=term;renderResults();status('Search the enabled '+labelById[id].label.toLowerCase()+' layer for '+organ);}
+});
+updateLayerUI();preset('skeleton');
+</script>
+<script>
+window.addEventListener('unhandledrejection',()=>{const b=document.getElementById('progress');if(!b.hidden){document.getElementById('progress-title').textContent='3D renderer unavailable';document.getElementById('progress-detail').textContent='WebGL or a remote JavaScript module could not load. Check your network or WebGL support.';}});
+</script>
+</body></html>

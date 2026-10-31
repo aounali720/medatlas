@@ -107,3 +107,7 @@ Clinical editorial checkpoint: review medical notes with subject-matter experts,
 
 ### Updated anatomy studio
 The main 3D anatomy page now hosts `anatomy-studio.html`, adapting the MIT-licensed Écorché renderer and its 634 named skeletal and muscular structures. Users can rotate, zoom, search and directly select structures, toggle muscle/skeleton layers, and adjust superficial-muscle opacity. The anatomical model is © respective licensors under CC BY-SA 4.0 and loaded from external pinned sources. See `MODEL_ATTRIBUTION.md` for full license terms. This model is intended for education only.
+
+
+## Integrated systems anatomy viewer
+The main Anatomy Lab now embeds `anatomy-integrated.html`, a custom Three.js anatomical atlas with independently selectable aligned Z-Anatomy-derived layers for skeleton, muscles, cardiovascular anatomy (including blood vessels), brain and nerves, respiratory, digestive, urinary, endocrine, reproductive and lymphatic structures. The interface includes system presets, model search, selection highlight, structure-focused camera, opacity control, and anterior/posterior/lateral views. To protect performance, GLBs are downloaded *only when that system is selected*. The original `anatomy-studio.html` stays accessible for detailed skeletal and muscle inspection. This is an educational reference and not a clinically validated diagnostic atlas. See `MODEL_ATTRIBUTION.md` for license requirements and source details.

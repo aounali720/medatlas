@@ -113,3 +113,9 @@
 .hero-visual .floating-chip{z-index:4}
 @media(max-width:1050px){.medatlas-anatomical-stage{height:640px}}
 @media(max-width:700px){.medatlas-anatomical-stage{height:620px;min-height:580px;border-radius:12px}.atlas-citation{align-items:flex-start}}
+
+/* Aligned anatomical systems atlas: the complete 3D explorer runs in its own isolated frame. */
+.medatlas-anatomical-stage{height:715px;min-height:610px}
+.medatlas-anatomical-stage iframe{height:100%;width:100%;border:0}
+@media(max-width:850px){.medatlas-anatomical-stage{height:900px;min-height:700px}}
+@media(max-width:500px){.medatlas-anatomical-stage{height:950px;min-height:740px}}

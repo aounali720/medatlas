@@ -84,3 +84,11 @@ Source shelf: OpenStax Anatomy & Physiology, MSD Manual Professional, NICE guida
 The site is static and runs offline after loading if it has been cached or copied locally, except outbound references, which require connectivity. Bookmarks and topic reading progress are stored solely in your browser's local storage. Do not enter identifiable patient data.
 
 The medical dictionary also includes 174 new definitions, including vital-sign language, investigations, pharmacology, and examination abbreviations.
+
+## Specialist Desk and anatomical reference viewer
+
+The Specialist Desk contains 82 focused clinical reasoning topics, 34 investigation patterns, 20 OSCE/bedside revision checklists and 29 curated reference links. It is organized by specialty with live filtering, search, details, review progress, and printable notes. The entries are independently written study prompts, not care protocols or expert-verified clinical recommendations. Sources are labeled as further reading, not line-by-line endorsements.
+
+The anatomy studio replaces the primary schematic display with externally loaded **real source-derived 3D geometry** (separate organ, full skeleton and surface datasets), free camera navigation, multiple views and an explanatory sidebar. A simplified drawing is retained as an offline fallback. It requires WebGL and a network connection to jsDelivr. See [MODEL_ATTRIBUTION.md](MODEL_ATTRIBUTION.md) for provenance, CC BY-SA conditions and limitations. The 3D content has not undergone independent specialist validation.
+
+Clinical editorial checkpoint: review medical notes with subject-matter experts, link exact recommendation passages where clinical claims are used, maintain a version/audit trail, and localize medicines, emergency pathways and laboratory reference ranges before clinical use.

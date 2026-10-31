@@ -22,3 +22,68 @@
 @media(max-width:1170px){.study-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.study-home-callout{flex-direction:column;align-items:flex-start}.study-home-buttons{flex-direction:row}}
 @media(max-width:760px){.study-grid,.study-stats,.path-layout{grid-template-columns:1fr}.study-stats{gap:8px}.study-stats>div{padding:13px 16px}.study-stats b{font-size:22px}.study-home-callout{padding:21px 19px}.study-home-callout h2{font-size:21px}.study-home-buttons{flex-direction:column;width:100%}.path-detail{position:static;padding:19px}.study-card{min-height:0}.path-option{padding:14px}.study-modal .detail-block{padding:14px 15px}}
 @media print{.study-filters,.study-card-actions,.path-list,.study-home-buttons{display:none!important}.study-modal .study-reference a{color:#111}.study-modal .modal-body{padding:5px}}
+
+/* Anatomical reference studio */
+.real-anatomy-stage{height:670px;background:radial-gradient(ellipse at 50% 42%,#2d5260 0%,#163242 52%,#0a202e 100%);border:1px solid #294957;box-shadow:inset 0 0 72px #07182380,0 16px 42px #101d2933}
+.real-anatomy-stage:before{content:"";pointer-events:none;position:absolute;z-index:1;inset:12% 20%;border:1px solid #7099a527;border-radius:50%;box-shadow:0 0 0 30px #8aaeb808,0 0 0 75px #8aaeb805}
+.real-anatomy-stage model-viewer{position:absolute;inset:0;display:block;height:100%;width:100%;opacity:0;pointer-events:none;transition:opacity .45s;z-index:3;background:transparent;--poster-color:transparent;outline:none}
+.real-anatomy-stage.mesh-ready model-viewer{opacity:1;pointer-events:auto}
+.real-anatomy-stage #anatomy-canvas{opacity:1;transition:opacity .3s}
+.real-anatomy-stage.mesh-ready #anatomy-canvas{opacity:0;pointer-events:none}
+.real-anatomy-stage .stage-top{z-index:6}
+.real-anatomy-stage .stage-bottom{z-index:7;bottom:14px;left:14px;right:14px}
+.real-anatomy-stage .stage-tools{flex-wrap:wrap;max-width:79%}
+.real-anatomy-stage .stage-btn{font-size:11px;font-weight:650;padding:9px 11px;background:#102d3cdd;border-color:#7fb8c357;color:#effbfc}
+.real-anatomy-stage .stage-label{letter-spacing:1.6px;font-size:11px}
+.real-anatomy-stage .stage-sub{font-size:11px;color:#bbd5d9}
+.real-anatomy-stage .live-pill{background:#18463cc9;border-color:#5fba96a3}
+.anatomy-status{position:absolute;top:78px;left:22px;z-index:6;color:#b6d4dc;border:1px solid #a2cdd32e;border-radius:10px;background:#122d3ac7;padding:7px 10px;font-size:10px;pointer-events:none}
+.anatomy-stage.mesh-ready .anatomy-status{color:#c9f7e2;border-color:#87deb04a}
+.anatomy-disclaimer a{color:#268377;text-decoration:underline}
+
+/* Clinical specialist reference desk */
+.sp-intro{display:flex;justify-content:space-between;align-items:stretch;gap:24px;padding:28px;border:1px solid #dceae9;border-radius:19px;background:linear-gradient(125deg,#f1f8f4,#edf6f8 58%,#deebea);margin:22px 0 20px}
+.sp-intro>div:first-child{max-width:690px}
+.sp-intro h2{font-size:28px;letter-spacing:-.9px;line-height:1.18;color:#173746;margin:9px 0 12px}
+.sp-intro p{color:#55717d;max-width:650px;font-size:12px;line-height:1.85}
+.sp-evidence{display:flex;align-items:center;gap:7px;margin-top:13px;font-size:10px;color:#3f746e}
+.sp-intro-stat{flex:none;min-width:157px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;background:#103d48;color:white;padding:20px}
+.sp-intro-stat strong{font-size:50px;font-weight:800;letter-spacing:-2px;line-height:1.05}
+.sp-intro-stat span{font-size:12px;font-weight:700;margin-top:6px;color:#d7f4eb}
+.sp-intro-stat small{font-size:10px;margin-top:6px;color:#7dbab0}
+.sp-tabs{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 16px}
+.sp-tab{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #d7e4e6;color:#607885;padding:11px 16px;font-size:12px;font-weight:750;border-radius:10px}
+.sp-tab.selected{background:#1a5c5c;color:white;border-color:#1a5c5c}
+.sp-tab small{background:#e9f4f4;border-radius:6px;color:#3f6867;padding:3px 6px}
+.sp-tab.selected small{background:#367570;color:white}
+.sp-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0 10px}
+.sp-search{display:flex;align-items:center;gap:11px;background:white;border:1px solid #dbe6e8;box-shadow:0 2px 8px #0d273007;border-radius:11px;padding:0 14px;flex:1;max-width:560px;color:#579082}
+.sp-search input{width:100%;min-width:0;background:transparent;border:0;outline:0;font:inherit;color:#173746;font-size:12px;height:44px}
+.sp-toolbar>span{color:#72909a;font-size:11px;white-space:nowrap}
+.sp-filters{display:flex;flex-wrap:wrap;gap:6px;margin:15px 0 18px}
+.sp-chip{background:#fff;color:#6b8391;border:1px solid #e1e9ec;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:650}
+.sp-chip.selected{background:#dcf4eb;border-color:#a4d4c6;color:#1b7c68}
+.sp-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.specialist-card{min-width:0;display:flex;flex-direction:column;border:1px solid #e2e9ea;border-radius:15px;background:white;padding:19px;box-shadow:0 4px 18px #2e455408;transition:transform .2s,box-shadow .2s,border-color .2s}
+.specialist-card:hover{transform:translateY(-2px);box-shadow:0 10px 22px #21394612;border-color:#b8dad2}
+.sp-card-top{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:19px}
+.sp-card-type{font-size:9px;letter-spacing:.7px;font-weight:800;text-transform:uppercase;color:#458b7e}
+.sp-reviewed{font-size:9px;color:#33836a;display:flex;align-items:center;gap:3px}
+.specialist-card h3{font-size:15px;line-height:1.35;letter-spacing:-.3px;color:#243e49;margin:10px 0 9px}
+.specialist-card p{font-size:11px;color:#758f99;line-height:1.72;margin:0 0 16px;flex:1}
+.sp-open{align-self:flex-start;border:0;background:#e8f5ef;border-radius:8px;padding:9px 11px;color:#217c67;display:flex;align-items:center;gap:9px;font-size:10px;font-weight:800}
+.sp-open:hover{background:#ceebde}
+.specialist-empty{grid-column:1/-1;background:#fff;border:1px dashed #bad1d3;padding:35px;text-align:center;color:#637e85;border-radius:12px}
+.sp-source-section{margin:36px 0 25px;background:#fbfdfc;border:1px solid #e4eeeb;border-radius:17px;padding:25px}
+.sp-source-section h2{font-size:22px;letter-spacing:-.6px;color:#213f48;margin:8px 0}
+.sp-source-section p{font-size:11px;color:#64818a;margin:0 0 20px;line-height:1.6}
+.sp-source-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sp-source-grid a{background:white;border:1px solid #e0eaeb;padding:15px;border-radius:11px;text-decoration:none;display:flex;flex-direction:column;gap:7px;min-width:0}
+.sp-source-grid a:hover{border-color:#a2d4c5;background:#f4fbf8}
+.sp-source-grid b{font-size:11px;line-height:1.45;color:#294651}
+.sp-source-grid small{font-size:10px;line-height:1.5;color:#81949c}
+.sp-source-grid span{margin-top:auto;font-size:10px;font-weight:750;color:#298b78}
+.sp-checklist{padding-left:21px;display:grid;gap:9px;font-size:12px;line-height:1.7}
+@media(max-width:1100px){.sp-results,.sp-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.sp-intro{flex-direction:column;padding:21px}.sp-intro h2{font-size:24px}.sp-intro-stat{min-width:0;align-items:flex-start}.sp-intro-stat strong{font-size:33px}.sp-results,.sp-source-grid{grid-template-columns:1fr}.sp-tab{font-size:11px;padding:10px}.sp-toolbar{flex-wrap:wrap}.sp-search{max-width:none}.real-anatomy-stage{height:525px}.real-anatomy-stage .stage-tools{max-width:100%}.real-anatomy-stage .stage-bottom{flex-direction:column;align-items:flex-start}.real-anatomy-stage .axis-text{display:none}.real-anatomy-stage .stage-btn{font-size:9px;padding:7px 8px}.real-anatomy-stage .anatomy-status{top:70px;left:12px;font-size:9px;max-width:85%}}
+@media(prefers-reduced-motion:reduce){.specialist-card{transition:none}.real-anatomy-stage model-viewer{transition:none}}

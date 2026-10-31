@@ -1,0 +1,11 @@
+# Anatomy viewer — third-party asset credits
+
+The interactive 3D viewer loads externally hosted GLB assets on demand. **They are not distributed or presented as original MedAtlas artwork.** It falls back to the site's existing schematic WebGL illustration when connectivity, JavaScript module support or WebGL is unavailable.
+
+1. **Full skeleton:** BodyParts3D 3.0, © The Database Center for Life Science (DBCLS), adapted by [OrganUI Skeleton](https://github.com/organui/skeleton-3d). Model at `public/models/skeleton.glb`; source commit `120fc17278559057b37aff516eee89d263b604c6`. The model is offered under **Creative Commons Attribution–Share Alike 2.1 Japan (CC BY-SA 2.1 JP)**. [Model attribution](https://github.com/organui/skeleton-3d/blob/main/public/models/ATTRIBUTION.md). More details at [source repository](https://github.com/organui/skeleton-3d).
+2. **Organ and body-surface geometry:** BodyParts3D 3.0, © The Database Center for Life Science, adapted and packaged by [yamz8/human-body-simulator](https://github.com/yamz8/human-body-simulator). `public/models/anatomy-organs.glb` and `public/models/anatomy-skin.glb`, source commit `e4d76fbb424d15e1364963528a082a78fa359161`. The derivatives are described by the project as covered by **CC BY-SA 2.1 JP**. Review that project's [THIRD_PARTY_NOTICES.md](https://github.com/yamz8/human-body-simulator/blob/main/THIRD_PARTY_NOTICES.md) before redistributing modified models.
+3. **3D web component:** [Google model-viewer](https://modelviewer.dev/) (Apache-2.0) loaded by jsDelivr on supported browsers.
+
+The model files are requested via pinned GitHub asset URLs served by the jsDelivr CDN. Asset copyrights and reuse terms belong to the respective authors and original data licensors; CC BY-SA attribution and share-alike conditions apply to derivative model reuse. This project does not import those models into a proprietary license. No claim is made that all anatomy is complete, anatomist-reviewed, patient-specific or accurate for diagnostic measurement.
+
+The skin, organ and skeleton meshes are **independent educational datasets**; their spatial coordinates are not guaranteed to be congruent. The viewer switches datasets rather than inaccurately merging them. The selection list links explanatory notes and does not imply that individual structures have been identified or isolated in the 3D geometry.

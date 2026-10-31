@@ -115,3 +115,7 @@ The main Anatomy Lab now embeds `anatomy-integrated.html`, a custom Three.js ana
 
 ## Ward Desk and quality assurance (31 October 2026)
 An additional `ward-revision.js` collection contains 63 authored presenting-complaint and diagnostic-reasoning topics across 15 specialties, linked to 30 named primary further-reading sources. The Ward Desk is integrated with navigation, category filters, unified search and local reviewed-state tracking. See `INTEGRATION_AUDIT.md` for completed integration findings and limitations. The `tests/integration-smoke.cjs` suite runs in GitHub Actions on each push. Educational only; no prescribing doses or patient-data entry.
+
+
+## Knowledge Bank: 673 added revision entries
+An additional collection in `medical-compendium.js` contains 673 newly written, concise high-yield entries in ten categories spanning basic sciences, clinical medicine, pharmacology, diagnostic tests, emergency care, procedures and ethics. Open `#/compendium` for keyword search, subject and level filters, paginated lists, note details, and per-topic reviewed state. Knowledge Bank entries are also indexed by global search. Sources are wider further-reading references and PubMed search links, not independently verified claim-specific citations. See `MEDICAL_EXPANSION.md` for category counts and limitations.

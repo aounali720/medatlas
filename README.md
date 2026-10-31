@@ -50,6 +50,10 @@ medatlas-site/
   styles.css         responsive visual design
   app.js             application UI, search, bookmarks, quizzes
   atlas-expansion.js  clinical revision, cases, investigations, study pathways and glossary extension
+  specialist-data.js  specialty diagnostic patterns, OSCEs and clinical revision
+  clinical-mastery.js  structured clinical reasoning chapters and source links
+  assets/anatomy-study.svg  schematic 2D fallback illustration
+  MODEL_ATTRIBUTION.md  optional anatomical model credits
   data.js            article, medicine, dictionary, quiz, reference data
   anatomy.js         native WebGL 3D scene with 2D fallback
   assets/favicon.svg favicon
@@ -89,6 +93,14 @@ The medical dictionary also includes 174 new definitions, including vital-sign l
 
 The Specialist Desk contains 82 focused clinical reasoning topics, 34 investigation patterns, 20 OSCE/bedside revision checklists and 29 curated reference links. It is organized by specialty with live filtering, search, details, review progress, and printable notes. The entries are independently written study prompts, not care protocols or expert-verified clinical recommendations. Sources are labeled as further reading, not line-by-line endorsements.
 
-The anatomy studio replaces the primary schematic display with externally loaded **real source-derived 3D geometry** (separate organ, full skeleton and surface datasets), free camera navigation, multiple views and an explanatory sidebar. A simplified drawing is retained as an offline fallback. It requires WebGL and a network connection to jsDelivr. See [MODEL_ATTRIBUTION.md](MODEL_ATTRIBUTION.md) for provenance, CC BY-SA conditions and limitations. The 3D content has not undergone independent specialist validation.
+The anatomy studio now **starts reliably in a self-contained WebGL study mode** (with an explicitly schematic 2D compatibility diagram on browsers without WebGL). Rotate, pan between standard views, change layers, zoom, or use keyboard arrows and +/−. An optional **Load detailed anatomical mesh** control requests externally hosted sourced models. Those meshes require internet access, a functioning model-viewer module, Draco decoder and WebGL; loading is not guaranteed on restricted networks. Mesh loading failures preserve the interactive offline view. See [MODEL_ATTRIBUTION.md](MODEL_ATTRIBUTION.md) for provenance, CC BY-SA conditions and limitations. The 3D content has not undergone independent specialist validation.
 
 Clinical editorial checkpoint: review medical notes with subject-matter experts, link exact recommendation passages where clinical claims are used, maintain a version/audit trail, and localize medicines, emergency pathways and laboratory reference ranges before clinical use.
+
+## October 2026 — clinical mastery and anatomy reliability update
+
+- Adds **64 distinct clinical-reasoning chapters** across cardiovascular, respiratory, renal, endocrine, neurologic, gastrointestinal, hematologic, infectious, emergency, obstetric, pediatric, surgical, medication safety and professional practice domains. Each opens a structured educational note: mechanisms, focused assessment, investigations, diagnostic trap, urgent warning features and a relevant primary reading link. Chapters include filtering, search, print and reviewed-state tracking in the browser.
+- New `clinical-mastery.js` holds the structured content and source metadata. The overview and cross-library search now include these topics.
+- Anatomy begins in the bundled interactive offline rendering rather than silently waiting for an external `<model-viewer>` download. A user can explicitly request higher-detail externally hosted GLBs. Loader failures and timeouts are visible and retain a working fallback. The body view controls also rotate the offline WebGL view.
+- Adds an original 2D anatomy chart (`assets/anatomy-study.svg`) for environments where WebGL is unavailable. The 2D chart is a compatibility display, **not a functional replacement for anatomically accurate 3D data**. The optional higher-detail meshes have not been independently tested from every user network/device, nor anatomist-certified.
+- Source links provide further reading, but **have not been line-by-line verified** by clinicians. This is a study product, not a medical device or bedside decision system.

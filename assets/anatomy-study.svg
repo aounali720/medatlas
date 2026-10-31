@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 1100" role="img" aria-label="Schematic anatomical study poster; not a clinical diagram"><defs>
+<linearGradient id="skin" x2="1" y2="1"><stop stop-color="#91b5c0" stop-opacity=".25"/><stop offset="1" stop-color="#5b899a" stop-opacity=".06"/></linearGradient><linearGradient id="bone" x2=".2" y2="1"><stop stop-color="#f7f2e5"/><stop offset="1" stop-color="#c6c1b5"/></linearGradient><radialGradient id="lung"><stop stop-color="#a8d8e6"/><stop offset="1" stop-color="#5197b8"/></radialGradient><radialGradient id="liver"><stop stop-color="#dbb28b"/><stop offset="1" stop-color="#a87456"/></radialGradient><filter id="glow"><feGaussianBlur stdDeviation="10"/></filter></defs>
+<g transform="translate(60 10)" stroke-linejoin="round" stroke-linecap="round">
+<path d="M351 101c-64 0-94 50-94 114 0 42 18 68 45 92l-22 37c-87 8-135 61-169 134l-53 137c-6 28 8 42 32 35l94-140 16 134-23 146-33 231c-4 35 16 56 39 49l73-295 60-2 75 295c23 7 42-11 38-46l-40-255-6-143 17-132 88 135c25 8 44-8 39-32l-50-139c-38-80-91-131-176-134l-19-39c25-25 38-62 38-104 0-69-35-108-92-108z" transform="translate(10 0)" fill="url(#skin)" stroke="#8cbece" stroke-opacity=".52" stroke-width="2.5"/>
+<!-- central skeleton -->
+<path d="M350 326L350 720" stroke="#ddd7c8" stroke-opacity=".45" stroke-width="18"/>
+<path d="M350 336L350 623" stroke="#e8e2d2" stroke-width="6" stroke-dasharray="5 12"/>
+<path d="M310 308Q350 324 393 307" stroke="#e4decb" stroke-width="14" fill="none"/>
+<path d="M305 715q45-30 90 0" stroke="#eee5d3" stroke-width="17" fill="none"/>
+<!-- cranium, orbits, jaw -->
+<path d="M286 210Q282 121 350 113Q417 120 420 200L406 267Q384 294 350 294Q321 291 296 270Z" fill="#dbcfca" opacity=".55" stroke="#e7d9cb" stroke-width="7"/>
+<path d="M300 214Q319 203 341 218M360 218Q382 200 402 214" stroke="#687a87" stroke-width="9" fill="none" opacity=".6"/>
+<path d="M322 265Q352 283 380 266" fill="none" stroke="#c4b6ab" stroke-width="8"/>
+<!-- pelvis -->
+<path d="M265 668Q290 648 321 665L349 711 383 665Q421 642 447 666Q422 718 385 747L351 726Q311 755 268 711Z" fill="#c1c4c0" stroke="#e9dfc8" stroke-opacity=".7" stroke-width="9" opacity=".5"/>
+
+<path d="M350 365 Q 270 310 260 380 M350 365 Q 430 310 440 380" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 390 Q 270 335 260 405 M350 390 Q 430 335 440 405" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 415 Q 270 360 260 430 M350 415 Q 430 360 440 430" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 440 Q 264 385 254 455 M350 440 Q 436 385 446 455" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 465 Q 264 410 254 480 M350 465 Q 436 410 446 480" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 490 Q 264 435 254 505 M350 490 Q 436 435 446 505" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 515 Q 258 460 248 530 M350 515 Q 442 460 452 530" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 540 Q 271 485 261 555 M350 540 Q 429 485 439 555" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 565 Q 284 510 274 580 M350 565 Q 416 510 426 580" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<path d="M350 590 Q 291 535 281 605 M350 590 Q 409 535 419 605" fill="none" stroke="#e4dcc6" stroke-opacity=".5" stroke-width="4"/>
+<!-- lung lobes -->
+<path d="M330 337Q302 314 272 340Q247 378 250 455Q251 520 290 554Q326 550 333 508Z" fill="url(#lung)" opacity=".85" stroke="#caebee" stroke-width="3"/>
+<path d="M369 338Q402 311 434 354Q461 401 451 455Q448 516 407 556Q366 548 368 508Z" fill="url(#lung)" opacity=".9" stroke="#c9e8ed" stroke-width="3"/>
+<path d="M351 293L351 360M351 364l-28 39M353 363l32 41" fill="none" stroke="#dcbab4" stroke-width="15"/>
+<path d="M317 405Q286 465 310 523M408 400Q430 475 410 522" fill="none" stroke="#e7faff" stroke-opacity=".29" stroke-width="3"/>
+<!-- heart and great vessels -->
+<path d="M345 424Q337 389 351 374M358 419L374 371M350 407L326 385" fill="none" stroke="#bd6276" stroke-width="13"/>
+<path d="M345 445C326 417 305 445 310 475C313 498 342 525 353 541Q378 514 386 485C405 434 362 421 345 445Z" fill="#c84e68" stroke="#f08fa4" stroke-width="5"/>
+<path d="M344 453L349 519" stroke="#f1a6aa" stroke-width="4"/>
+<!-- liver and stomach -->
+<path d="M236 568Q292 540 364 560Q374 579 360 622Q337 650 258 635Q227 615 236 568Z" fill="url(#liver)" stroke="#e5b294" stroke-width="3"/>
+<path d="M390 561Q414 550 432 580Q441 612 415 646Q391 657 386 623Q365 600 390 561Z" fill="#dda994" stroke="#f4d1b6" stroke-width="3"/>
+<!-- kidneys -->
+<path d="M265 625Q228 638 238 688Q252 718 280 703Q300 676 285 642Z" fill="#aa819e" stroke="#e0b3c7" stroke-width="3"/>
+<path d="M420 623Q458 634 453 683Q445 715 414 705Q394 680 408 647Z" fill="#aa819e" stroke="#e0b3c7" stroke-width="3"/>
+<!-- intestinal loops -->
+<path d="M309 659Q329 639 367 654Q400 643 402 674Q390 695 368 694Q398 701 387 728Q356 740 335 721Q301 749 293 707Q309 691 335 702Q307 696 309 659Z" fill="#c39b8c" stroke="#e9c0ac" stroke-width="4"/>
+<path d="M320 678Q359 650 379 687Q336 698 324 716M309 694Q343 717 386 710" stroke="#f0d1b8" stroke-width="10" fill="none" opacity=".62"/>
+<!-- limb bone hints -->
+<path d="M243 373L180 540 145 633M457 370L512 535 547 632M309 755L291 912 271 1047M391 755L413 922 438 1047" fill="none" stroke="#e2d8c2" opacity=".65" stroke-width="15"/>
+<circle cx="180" cy="540" r="12" fill="#e7dfcf" opacity=".76"/><circle cx="512" cy="535" r="12" fill="#e7dfcf" opacity=".76"/><circle cx="291" cy="912" r="14" fill="#e7dfcf" opacity=".76"/><circle cx="413" cy="922" r="14" fill="#e7dfcf" opacity=".76"/>
+</g></svg>

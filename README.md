@@ -11,7 +11,7 @@ A complete, responsive **static website** with a learning dashboard, 3D anatomy 
 - **Medicine Index:** 60 medicine introductions, drug classes, uses, cautions and links to current official drug references. No individual doses or prescriptions.
 - **Clinical Techniques:** high-level assessment and clinical workflow information, not hands-on training for invasive procedures.
 - **Medical Dictionary:** 140+ definitions and abbreviations, browse by letter.
-- **Learning Studio:** 18 quiz questions, feedback and score.
+- **Learning Studio:** 48 quiz questions, feedback, sources and score.
 - **Saved Library:** bookmarks and read status stored in this browser only.
 - **Sources & About:** WHO, CDC, AHA, AHRQ, MedlinePlus, FDA, OpenStax and Merck references.
 
@@ -49,6 +49,7 @@ medatlas-site/
   index.html         site entry
   styles.css         responsive visual design
   app.js             application UI, search, bookmarks, quizzes
+  atlas-expansion.js  clinical revision, cases, investigations, study pathways and glossary extension
   data.js            article, medicine, dictionary, quiz, reference data
   anatomy.js         native WebGL 3D scene with 2D fallback
   assets/favicon.svg favicon
@@ -71,3 +72,15 @@ medatlas-site/
 ## Extending the content
 
 The `window.MED_DATA` object in `data.js` contains `articles`, `medicines`, `glossary`, `anatomy`, `quiz`, `categories`, `sources`. Add new entries using the existing object format and link material to relevant reputable references. Review content with domain-qualified professionals before any public-facing clinical deployment.
+
+## Clinical revision expansion
+
+MedAtlas now includes six learning paths, 162 topic summaries (from cell physiology to core medical specialties), 40 investigation reference cards, 30 fictional clinical cases, and 48 multiple-choice questions. The expanded library includes patient-safety alerts, interpretation pitfalls, reading progress, bookmarking, and search across the extended materials.
+
+The content is designed as a **learning guide**, not a complete medical textbook, validated hospital guideline, or medical decision support tool. Summaries are original educational overviews, not verbatim extracts or endorsements from the organizations linked. Individual topic references point to authoritative **reference hubs**, not necessarily to a specific supporting passage. Medication choices, doses, test cutoffs, antimicrobial protocols, emergency care, immunization schedules, and clinical decisions require a licensed professional, local protocol and the latest primary guideline. This website does not receive real-time guideline updates or maintain clinician-reviewed editorial sign-off.
+
+Source shelf: OpenStax Anatomy & Physiology, MSD Manual Professional, NICE guidance, MedlinePlus Medical Tests and Drug Information, Stanford Medicine 25, Resuscitation Council UK, AHA 2025 CPR/ECC guidance, WHO patient safety and essential medicines, KDIGO kidney guidelines, CDC infection control and sepsis guidance, and the Drug Regulatory Authority of Pakistan. Sources and original publication dates should be checked before clinical use.
+
+The site is static and runs offline after loading if it has been cached or copied locally, except outbound references, which require connectivity. Bookmarks and topic reading progress are stored solely in your browser's local storage. Do not enter identifiable patient data.
+
+The medical dictionary also includes 174 new definitions, including vital-sign language, investigations, pharmacology, and examination abbreviations.

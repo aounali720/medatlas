@@ -111,3 +111,7 @@ The main 3D anatomy page now hosts `anatomy-studio.html`, adapting the MIT-licen
 
 ## Integrated systems anatomy viewer
 The main Anatomy Lab now embeds `anatomy-integrated.html`, a custom Three.js anatomical atlas with independently selectable aligned Z-Anatomy-derived layers for skeleton, muscles, cardiovascular anatomy (including blood vessels), brain and nerves, respiratory, digestive, urinary, endocrine, reproductive and lymphatic structures. The interface includes system presets, model search, selection highlight, structure-focused camera, opacity control, and anterior/posterior/lateral views. To protect performance, GLBs are downloaded *only when that system is selected*. The original `anatomy-studio.html` stays accessible for detailed skeletal and muscle inspection. This is an educational reference and not a clinically validated diagnostic atlas. See `MODEL_ATTRIBUTION.md` for license requirements and source details.
+
+
+## Ward Desk and quality assurance (31 October 2026)
+An additional `ward-revision.js` collection contains 63 authored presenting-complaint and diagnostic-reasoning topics across 15 specialties, linked to 30 named primary further-reading sources. The Ward Desk is integrated with navigation, category filters, unified search and local reviewed-state tracking. See `INTEGRATION_AUDIT.md` for completed integration findings and limitations. The `tests/integration-smoke.cjs` suite runs in GitHub Actions on each push. Educational only; no prescribing doses or patient-data entry.

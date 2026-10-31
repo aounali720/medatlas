@@ -1,0 +1,24 @@
+name: MedAtlas site integrity
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript syntax
+        run: |
+          node --check app.js
+          node --check ward-revision.js
+          node --check data.js
+          node --check atlas-expansion.js
+          node --check specialist-data.js
+          node --check clinical-mastery.js
+      - name: Test site routes and cross-page integration
+        run: node tests/integration-smoke.cjs
